@@ -1,54 +1,88 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="rtl">
 <head>
-  <title>Bootstrap 4 Example</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <title>جایگزینی "ی" با "ي"</title>
+    <style>
+        * {
+            font-family: Tahoma;
+        }
+    </style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link href='https://www.fontonline.ir/css/BZar.css' rel='stylesheet' type='text/css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var ctrlDown = false,
+                ctrlKey = 17,
+                cmdKey = 91,
+                vKey = 86,
+                cKey = 67;
+
+            $(document).keydown(function (e) {
+                if (e.keyCode == ctrlKey || e.keyCode == cmdKey) ctrlDown = true;
+            }).keyup(function (e) {
+                if (e.keyCode == ctrlKey || e.keyCode == cmdKey) ctrlDown = false;
+            });
+
+            $("#inputTextarea").keydown(function (e) {
+                if (ctrlDown && (e.keyCode == cKey)) copy();
+            }).keyup(function (e) {
+                var inputTextarea = $("#inputTextarea").val();
+                $("#outputTextarea").val(inputTextarea.replace(/ی/g, "ي"));
+            });
+
+            // Document Ctrl + C
+            $(document).keydown(function (e) {
+                if (ctrlDown && (e.keyCode == cKey)) console.log("Document catch Ctrl+C");
+            });
+            $('#copy').click(function () {
+                copy();
+                document.execCommand("copy");
+            });
+
+            let copyTimeout;
+
+            function copy() {
+                var $outputTextarea = $('#outputTextarea');
+                $outputTextarea.attr('title', 'متن کپی شد');
+                $outputTextarea.tooltip();
+                $outputTextarea.select();
+                copyTimeout = setTimeout(function () {
+                    $outputTextarea.attr('title', '');
+                    $outputTextarea.tooltip('dispose');
+                    $("#inputTextarea").focus();
+                }, 3000);
+            }
+        });
+    </script>
 </head>
 <body>
 
 <div class="container">
-<!-- Default form contact -->
-<form class="text-center border border-light p-5" action="#!">
+    <!-- Default form contact -->
+    <form class="text-center border border-light p-5" action="#!">
 
-    <p class="h4 mb-4">Contact us</p>
+        <p class="h4 mb-4">جایگزینی "ی" با "ي"</p>
 
-    <!-- Name -->
-    <input type="text" id="defaultContactFormName" class="form-control mb-4" placeholder="Name">
+        <!-- Message -->
+        <div class="form-group">
+            <textarea class="form-control rounded-0" id="inputTextarea" rows="3" placeholder="متن ورودی"></textarea>
+        </div>
+        <!-- Message -->
+        <div class="form-group">
+            <textarea readonly class="form-control rounded-0" id="outputTextarea" rows="3"
+                      placeholder="متن خروجی"></textarea>
+        </div>
 
-    <!-- Email -->
-    <input type="email" id="defaultContactFormEmail" class="form-control mb-4" placeholder="E-mail">
+        <!-- Send button -->
+        <button class="btn btn-info btn-block" id="copy" type="button">کپی متن خروجی (Ctrl + C)</button>
 
-    <!-- Subject -->
-    <label>Subject</label>
-    <select class="browser-default custom-select mb-4">
-        <option value="" disabled>Choose option</option>
-        <option value="1" selected>Feedback</option>
-        <option value="2">Report a bug</option>
-        <option value="3">Feature request</option>
-        <option value="4">Feature request</option>
-    </select>
-
-    <!-- Message -->
-    <div class="form-group">
-        <textarea class="form-control rounded-0" id="exampleFormControlTextarea2" rows="3" placeholder="Message"></textarea>
-    </div>
-
-    <!-- Copy -->
-    <div class="custom-control custom-checkbox mb-4">
-        <input type="checkbox" class="custom-control-input" id="defaultContactFormCopy">
-        <label class="custom-control-label" for="defaultContactFormCopy">Send me a copy of this message</label>
-    </div>
-
-    <!-- Send button -->
-    <button class="btn btn-info btn-block" type="submit">Send</button>
-
-</form>
-<!-- Default form contact -->
+    </form>
+    <!-- Default form contact -->
 </div>
 
 </body>

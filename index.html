@@ -32,7 +32,12 @@
                 if (ctrlDown && (e.keyCode == cKey)) copy();
             }).keyup(function (e) {
                 var inputTextarea = $("#inputTextarea").val();
-                $("#outputTextarea").val(inputTextarea.replace(/ی/g, "ي"));
+                findList.forEach(function (find, index) {
+                    if (replaceList.length > index) {
+                        inputTextarea = inputTextarea.replace(new RegExp(find, "g"), replaceList[index]);
+                    }
+                });
+                $("#outputTextarea").val(inputTextarea);
             });
 
             // Document Ctrl + C
@@ -44,14 +49,26 @@
                 document.execCommand("copy");
             });
 
-            let copyTimeout;
+
+            var urlParams = new URLSearchParams(window.location.search);
+            var findList = urlParams.getAll('f');
+            var replaceList = urlParams.getAll('r');
+            findList = findList.length ? findList : ['ی'];
+            replaceList = replaceList.length ? replaceList : ['ي'];
+            var findReplaceText = [];
+            findList.forEach(function (find, index) {
+                if (replaceList.length > index) {
+                    findReplaceText.push(find + '" با "' + replaceList[index]);
+                }
+            });
+            $('#findReplaceText').text('جایگزینی: "'+findReplaceText.join('" , "')+'"');
 
             function copy() {
                 var $outputTextarea = $('#outputTextarea');
                 $outputTextarea.attr('title', 'متن کپی شد');
                 $outputTextarea.tooltip();
                 $outputTextarea.select();
-                copyTimeout = setTimeout(function () {
+                setTimeout(function () {
                     $outputTextarea.attr('title', '');
                     $outputTextarea.tooltip('dispose');
                     $("#inputTextarea").focus();
@@ -66,7 +83,7 @@
     <!-- Default form contact -->
     <form class="text-center border border-light p-5" action="#!">
 
-        <p class="h4 mb-4">جایگزینی "ی" با "ي"</p>
+        <p class="h4 mb-4" id="findReplaceText">جایگزینی "ی" با "ي"</p>
 
         <!-- Message -->
         <div class="form-group">

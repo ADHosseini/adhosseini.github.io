@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" dir="rtl">
+<head>
+    <title>جایگزینی "ی" با "ي"</title>
+    <style>
+        * {
+            font-family: Tahoma;
+        }
+    </style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link href='https://www.fontonline.ir/css/BZar.css' rel='stylesheet' type='text/css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var ctrlDown = false,
+                ctrlKey = 17,
+                cmdKey = 91,
+                vKey = 86,
+                cKey = 67;
+
+            $(document).keydown(function (e) {
+                if (e.keyCode == ctrlKey || e.keyCode == cmdKey) ctrlDown = true;
+            }).keyup(function (e) {
+                if (e.keyCode == ctrlKey || e.keyCode == cmdKey) ctrlDown = false;
+            });
+
+            $("#inputTextarea").keydown(function (e) {
+                if (ctrlDown && (e.keyCode == cKey)) copy();
+            }).keyup(function (e) {
+                var inputTextarea = $("#inputTextarea").val();
+                findList.forEach(function (find, index) {
+                    if (replaceList.length > index) {
+                        inputTextarea = inputTextarea.replace(new RegExp(find, "g"), replaceList[index]);
+                    }
+                });
+                $("#outputTextarea").val(inputTextarea);
+            });
+
+            // Document Ctrl + C
+            $(document).keydown(function (e) {
+                if (ctrlDown && (e.keyCode == cKey)) console.log("Document catch Ctrl+C");
+            });
+            $('#copy').click(function () {
+                copy();
+                document.execCommand("copy");
+            });
+
+
+            var urlParams = new URLSearchParams(window.location.search);
+            var findList = urlParams.getAll('f');
+            var replaceList = urlParams.getAll('r');
+            findList = findList.length ? findList : ['ی'];
+            replaceList = replaceList.length ? replaceList : ['ي'];
+            var findReplaceText = [];
+            findList.forEach(function (find, index) {
+                if (replaceList.length > index) {
+                    findReplaceText.push(find + '" با "' + replaceList[index]);
+                }
+            });
+            $('#findReplaceText').text('جایگزینی: "'+findReplaceText.join('" , "')+'"');
+
+            function copy() {
+                var $outputTextarea = $('#outputTextarea');
+                $outputTextarea.attr('title', 'متن کپی شد');
+                $outputTextarea.tooltip();
+                $outputTextarea.select();
+                setTimeout(function () {
+                    $outputTextarea.attr('title', '');
+                    $outputTextarea.tooltip('dispose');
+                    $("#inputTextarea").focus();
+                }, 3000);
+            }
+        });
+    </script>
+</head>
+<body>
+
+<div class="container">
+    <!-- Default form contact -->
+    <form class="text-center border border-light p-5" action="#!">
+
+        <p class="h4 mb-4" id="findReplaceText">جایگزینی "ی" با "ي"</p>
+
+        <!-- Message -->
+        <div class="form-group">
+            <textarea class="form-control rounded-0" id="inputTextarea" rows="3" placeholder="متن ورودی"></textarea>
+        </div>
+        <!-- Message -->
+        <div class="form-group">
+            <textarea readonly class="form-control rounded-0" id="outputTextarea" rows="3"
+                      placeholder="متن خروجی"></textarea>
+        </div>
+
+        <!-- Send button -->
+        <button class="btn btn-info btn-block" id="copy" type="button">کپی متن خروجی (Ctrl + C)</button>
+
+    </form>
+    <!-- Default form contact -->
+</div>
+
+</body>
+</html>

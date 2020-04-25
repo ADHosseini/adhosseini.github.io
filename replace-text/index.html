@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" dir="rtl">
 <head>
-    <title>جایگزینی "ی" با "ي"</title>
+    <title>Find and Replace - Multiple Text Online</title>
     <style>
         * {
             font-family: Tahoma;
+        }
+
+        .pointer {
+            cursor: pointer;
         }
     </style>
     <meta charset="utf-8">
@@ -14,93 +18,143 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            var ctrlDown = false,
-                ctrlKey = 17,
-                cmdKey = 91,
-                vKey = 86,
-                cKey = 67;
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 
-            $(document).keydown(function (e) {
-                if (e.keyCode == ctrlKey || e.keyCode == cmdKey) ctrlDown = true;
-            }).keyup(function (e) {
-                if (e.keyCode == ctrlKey || e.keyCode == cmdKey) ctrlDown = false;
-            });
-
-            $("#inputTextarea").keydown(function (e) {
-                if (ctrlDown && (e.keyCode == cKey)) copy();
-            }).keyup(function (e) {
-                var inputTextarea = $("#inputTextarea").val();
-                findList.forEach(function (find, index) {
-                    if (replaceList.length > index) {
-                        inputTextarea = inputTextarea.replace(new RegExp(find, "g"), replaceList[index]);
-                    }
-                });
-                $("#outputTextarea").val(inputTextarea);
-            });
-
-            // Document Ctrl + C
-            $(document).keydown(function (e) {
-                if (ctrlDown && (e.keyCode == cKey)) console.log("Document catch Ctrl+C");
-            });
-            $('#copy').click(function () {
-                copy();
-                document.execCommand("copy");
-            });
-
-
-            var urlParams = new URLSearchParams(window.location.search);
-            var findList = urlParams.getAll('f');
-            var replaceList = urlParams.getAll('r');
-            findList = findList.length ? findList : ['ی'];
-            replaceList = replaceList.length ? replaceList : ['ي'];
-            var findReplaceText = [];
-            findList.forEach(function (find, index) {
-                if (replaceList.length > index) {
-                    findReplaceText.push(find + '" با "' + replaceList[index]);
-                }
-            });
-            $('#findReplaceText').text('جایگزینی: "'+findReplaceText.join('" , "')+'"');
-
-            function copy() {
-                var $outputTextarea = $('#outputTextarea');
-                $outputTextarea.attr('title', 'متن کپی شد');
-                $outputTextarea.tooltip();
-                $outputTextarea.select();
-                setTimeout(function () {
-                    $outputTextarea.attr('title', '');
-                    $outputTextarea.tooltip('dispose');
-                    $("#inputTextarea").focus();
-                }, 3000);
-            }
-        });
-    </script>
 </head>
-<body>
+<body ng-app="myApp" ng-controller="myCtrl">
 
 <div class="container">
     <!-- Default form contact -->
     <form class="text-center border border-light p-5" action="#!">
 
-        <p class="h4 mb-4" id="findReplaceText">جایگزینی "ی" با "ي"</p>
+        <p class="h4 mb-4 pointer" data-toggle="modal" data-target="#myModal">{{findReplaceText()}}</p>
 
         <!-- Message -->
         <div class="form-group">
-            <textarea class="form-control rounded-0" id="inputTextarea" rows="3" placeholder="متن ورودی"></textarea>
+            <textarea class="form-control rounded-0" ng-copy="copy()" ng-model="inputTextarea" rows="3"
+                      placeholder="متن ورودی"></textarea>
         </div>
         <!-- Message -->
         <div class="form-group">
-            <textarea readonly class="form-control rounded-0" id="outputTextarea" rows="3"
+            <textarea readonly class="form-control rounded-0" ng-model="outputTextarea" id="outputTextarea" rows="3"
                       placeholder="متن خروجی"></textarea>
         </div>
 
         <!-- Send button -->
-        <button class="btn btn-info btn-block" id="copy" type="button">کپی متن خروجی (Ctrl + C)</button>
+        <button class="btn btn-info btn-block" ng-click="copy()" type="button">کپی متن خروجی (Ctrl + C)</button>
 
     </form>
     <!-- Default form contact -->
 </div>
 
+
+<!-- The Modal -->
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">یافتن و جایگزین کردن</h4>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th class="text-center">یافتن</th>
+                        <th class="text-center">جایگزین کردن با</th>
+                        <th class="text-center">
+                            <button ng-click="addRow()" type="button" class="btn btn-success btn-sm">افزودن</button>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="x in findReplaceList">
+                        <td><input ng-model="x.find" type="text" class="form-control"></td>
+                        <td><input ng-model="x.replace" type="text" class="form-control"></td>
+                        <td class="text-center">
+                            <button type="button" class="btn btn-danger btn-sm" ng-click="removeRow($index)">
+                                حذف
+                            </button>
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">بستن</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script>
+    var app = angular.module('myApp', []);
+
+    app.controller('myCtrl', function ($scope, $location) {
+        $scope.findReplaceList = [];
+        var searchObject = $location.search();
+        $scope.findList = searchObject.f != undefined ? (Array.isArray(searchObject.f) ? searchObject.f : [searchObject.f]) : ['ی'];
+        $scope.replaceList = searchObject.r != undefined ? (Array.isArray(searchObject.r) ? searchObject.r : [searchObject.r]) : ['ي'];
+        $scope.findList.forEach(function (find, index) {
+            if ($scope.replaceList.length > index) {
+                $scope.findReplaceList.push({find: find, replace: $scope.replaceList[index]});
+            }
+        });
+
+        $scope.$watch('findReplaceList', function (newValue) {
+            var f = [];
+            var r = [];
+            newValue.forEach(function (i) {
+                f.push(i.find);
+                r.push(i.replace);
+            })
+            $location.search('f', $scope.findList = f);
+            $location.search('r', $scope.replaceList = r);
+        }, true);
+
+        $scope.addRow = function () {
+            $scope.findReplaceList.push({find: '', replace: ''})
+        }
+        $scope.removeRow = function (index) {
+            $scope.findReplaceList.splice(index, 1);
+        }
+        $scope.findReplaceText = function () {
+            var findReplaceText = [];
+            $scope.findReplaceList.forEach(function (item) {
+                findReplaceText.push(item.find + '" با "' + item.replace);
+            });
+            return ('جایگزینی: "' + findReplaceText.join('" , "') + '"');
+        }
+        $scope.inputTextarea = '';
+        $scope.outputTextarea = '';
+        $scope.$watch('inputTextarea', function (inputTextarea) {
+            $scope.findList.forEach(function (find, index) {
+                if ($scope.replaceList.length > index) {
+                    inputTextarea = inputTextarea.replace(new RegExp(find, "g"), $scope.replaceList[index]);
+                }
+            });
+            $scope.outputTextarea = inputTextarea;
+        }, true);
+
+        $scope.copy = function () {
+            var $outputTextarea = $('#outputTextarea');
+            $outputTextarea.attr('title', 'متن کپی شد');
+            $outputTextarea.tooltip();
+            $outputTextarea.select();
+            document.execCommand("copy");
+            setTimeout(function () {
+                $outputTextarea.attr('title', '');
+                $outputTextarea.tooltip('dispose');
+                $("#inputTextarea").focus();
+            }, 3000);
+        }
+    });
+</script>
 </body>
 </html>

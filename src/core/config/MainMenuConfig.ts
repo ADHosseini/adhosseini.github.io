@@ -40,6 +40,14 @@ const DocMenuConfig = [
         svgIcon: publicPath+"media/icons/duotune/ecommerce/ecm007.svg",
         sub: [
           {
+            heading: "آرایه ها",
+            route: "/php/array",
+          },
+          {
+            heading: "آرایه های ورودی",
+            route: "/php/input_array",
+          },
+          {
             heading: "آرایه های پیش فرض",
             route: "/php/intro",
           },

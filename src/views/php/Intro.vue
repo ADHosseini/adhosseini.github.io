@@ -18,7 +18,7 @@
             <!--begin::Row-->
             <div class="row g-5">
               <div class="col-sm-4">
-                <a href="#" class="card bg-light-success hoverable min-h-125px shadow-none mb-5">
+                <a href="#/php/input_array/$_REQUEST" class="card bg-light-success hoverable min-h-125px shadow-none mb-5">
                   <div class="card-body d-flex flex-column flex-center">
                     <h3 class="fs-3 mb-2 text-dark fw-bolder" style="direction: ltr">$_REQUEST</h3>
                     <p class="mb-0 text-gray-600"></p>
@@ -26,7 +26,7 @@
                 </a>
               </div>
               <div class="col-sm-4">
-                <a href="#" class="card bg-light-danger hoverable min-h-125px shadow-none mb-5">
+                <a href="#/php/input_array/$_POST" class="card bg-light-danger hoverable min-h-125px shadow-none mb-5">
                   <div class="card-body d-flex flex-column flex-center text-center">
                     <h3 class="fs-3 mb-2 text-dark fw-bolder" style="direction: ltr">$_POST</h3>
                     <p class="mb-0 text-gray-600"></p>
@@ -34,7 +34,7 @@
                 </a>
               </div>
               <div class="col-sm-4">
-                <a href="#" class="card bg-light-warning hoverable min-h-125px shadow-none mb-5">
+                <a href="#/php/input_array/$_GET" class="card bg-light-warning hoverable min-h-125px shadow-none mb-5">
                   <div class="card-body d-flex flex-column flex-center text-center">
                     <h3 class="fs-3 mb-2 text-dark text-hover-primary fw-bolder" style="direction: ltr">$_GET</h3>
                     <p class="mb-0 text-gray-600"></p>
@@ -46,7 +46,7 @@
             <!--begin::Row-->
             <div class="row g-5">
               <div class="col-sm-8">
-                <a href="#" class="card bg-light-primary hoverable min-h-125px shadow-none mb-5">
+                <a href="#/php/input_array/$_FILES" class="card bg-light-primary hoverable min-h-125px shadow-none mb-5">
                   <div class="card-body d-flex flex-column flex-center text-center">
                     <h3 class="fs-3 mb-2 text-dark fw-bolder"  style="direction: ltr">$_FILES</h3>
                     <p class="mb-0 text-gray-600"></p>
@@ -74,11 +74,25 @@
                 <!--end::Row-->
               </div>
               <div class="col-sm-4">
-                <a href="#" class="card card-stretch mb-5 bg-light-info hoverable shadow-none min-h-250px">
+                <a class="card card-stretch mb-5 bg-light-info hoverable shadow-none min-h-250px">
                   <div class="card-body d-flex flex-column p-0">
                     <div class="d-flex flex-column flex-center text-center px-5 pt-10">
                       <h3 class="fs-3 mb-2 text-dark fw-bolder" style="direction: ltr">$_SERVER</h3>
-                      <p class="mb-0 text-gray-600"></p>
+                      <p class="mb-0 text-gray-600" style="direction: ltr;text-align: left">
+
+$_SERVER['PHP_SELF'];
+<br>
+                          $_SERVER['SERVER_NAME'];
+                          <br>
+                          $_SERVER['REQUEST_METHOD'];
+                          <br>
+                          $_SERVER['HTTP_REFERER'];
+                          <br>
+                          $_SERVER['HTTP_USER_AGENT'];
+                          <br>
+                          $_SERVER['REMOTE_ADDR'];
+
+                      </p>
                     </div>
                     <div class="flex-grow-1 bgi-no-repeat bgi-size-contain bgi-position-x-center bgi-position-y-bottom card-rounded-bottom" style="background-image:url('/start-html-free/assets/media/illustrations/terms-1.png')"></div>
                   </div>

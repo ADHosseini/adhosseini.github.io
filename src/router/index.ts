@@ -33,6 +33,16 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import("@/views/php/Intro.vue"),
       },
       {
+        path: "/php/array",
+        name: "phpArray",
+        component: () => import("@/views/php/Array.vue"),
+      },
+      {
+        path: "/php/input_array/:name?",
+        name: "phpInputArray",
+        component: () => import("@/views/php/InputArray.vue"),
+      },
+      {
         path: "/php/sessions",
         name: "phpSessions",
         component: () => import("@/views/php/Sessions.vue"),

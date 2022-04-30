@@ -32,6 +32,14 @@ const DocMenuConfig = [
             heading: "تابع",
             route: "/javascript/function",
           },
+          {
+            heading: "JSON",
+            route: "/javascript/json",
+          },
+          {
+            heading: "AJAX",
+            route: "/javascript/ajax",
+          },
         ],
       },
       {

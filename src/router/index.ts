@@ -78,6 +78,16 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import("@/views/javascript/Function.vue"),
       },
       {
+        path: "/javascript/json/:name?",
+        name: "javascriptJSON",
+        component: () => import("@/views/javascript/JSON.vue"),
+      },
+      {
+        path: "/javascript/ajax/:name?",
+        name: "javascriptAJAX",
+        component: () => import("@/views/javascript/AJAX.vue"),
+      },
+      {
         path: "/account",
         name: "account",
         component: () => import("@/components/page-layouts/Account.vue"),

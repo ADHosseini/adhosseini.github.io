@@ -59,6 +59,14 @@ const DocMenuConfig = [
             heading: "آرایه های پیش فرض",
             route: "/php/intro",
           },
+          {
+            heading: "تابع",
+            route: "/php/function",
+          },
+          {
+            heading: "نکات",
+            route: "/php/tips",
+          },
         ],
       },
       // {

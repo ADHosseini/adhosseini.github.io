@@ -13,21 +13,6 @@ const routes: Array<RouteRecordRaw> = [
         props: {publicPath: process.env.BASE_URL}
       },
       {
-        path: "/pages/about-us",
-        name: "about-us",
-        component: () => import("@/views/pages/AboutUs.vue"),
-      },
-      {
-        path: "/pages/invoice",
-        name: "invoice",
-        component: () => import("@/views/pages/Invoice.vue"),
-      },
-      {
-        path: "/pages/faq",
-        name: "faq",
-        component: () => import("@/views/pages/FAQ.vue"),
-      },
-      {
         path: "/php/intro",
         name: "phpIntro",
         component: () => import("@/views/php/Intro.vue"),
@@ -52,6 +37,12 @@ const routes: Array<RouteRecordRaw> = [
         name: "phpCookies",
         component: () => import("@/views/php/Cookies.vue"),
       },
+      {
+        path: "/php/:name?",
+        name: "phpIndex",
+        component: () => import("@/views/php/index.vue"),
+      },
+
       {
         path: "/javascript/intro",
         name: "javascriptIntro",

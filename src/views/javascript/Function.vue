@@ -456,6 +456,346 @@ document.write( a );
           </div>
           <!--end::Section-->
 
+          <!--begin::Section-->
+          <div class="m-0">
+            <!--begin::Heading-->
+            <div
+                class="
+                d-flex
+                align-items-center
+                collapsible
+                py-3
+                toggle
+                mb-0
+                collapsed
+              "
+                data-bs-toggle="collapse"
+                data-bs-target="#kt_run_7"
+                aria-expanded="false"
+            >
+              <!--begin::Icon-->
+              <div
+                  class="
+                  btn btn-sm btn-icon
+                  mw-20px
+                  btn-active-color-primary
+                  me-5
+                "
+              >
+                <span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
+                  <inline-svg :src="require('@/assets/media/icons/gen036.svg')" />
+                </span>
+                <span class="svg-icon toggle-off svg-icon-1">
+                  <inline-svg :src="require('@/assets/media/icons/gen035.svg')" />
+                </span>
+              </div>
+              <!--end::Icon-->
+
+              <!--begin::Title-->
+              <h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">
+                تابع به عنوان پارامتر ورودی یک تابع دیگر(callback)
+              </h4>
+              <!--end::Title-->
+            </div>
+            <!--end::Heading-->
+
+            <!--begin::Body-->
+            <div id="kt_run_7" class="fs-6 ms-1 collapse">
+              <!--begin::Text-->
+              <div class="mb-4 text-gray-600 fw-bold fs-6 ps-10">
+                مثال 1
+                <div class="pb-5">
+                  <CodeHighlighter lang="javascript"
+                  >{{ `
+$myFn8 = function ($a) {
+    return $a.length;
+};
+$names = ['Ali', 'Reza', 'Ahmad'];
+$out = $names.map($myFn8);
+console.log($names);
+console.log($out);
+` }}
+                  </CodeHighlighter>
+                </div>
+              </div>
+              <!--end::Text-->
+              <!--begin::Text-->
+              <div class="mb-4 text-gray-600 fw-bold fs-6 ps-10">
+                <div class="pb-5">
+                  مثال 2
+                  <CodeHighlighter lang="javascript"
+                  >{{ `
+function myFunction(){
+    console.log('Salam');
+}
+setInterval(myFunction,5000);
+` }}
+                  </CodeHighlighter>
+                </div>
+              </div>
+              <!--end::Text-->
+            </div>
+            <!--end::Content-->
+
+            <!--begin::Separator-->
+            <div class="separator separator-dashed"></div>
+            <!--end::Separator-->
+          </div>
+          <!--end::Section-->
+
+          <!--begin::Section-->
+          <div class="m-0">
+            <!--begin::Heading-->
+            <div
+                class="
+                d-flex
+                align-items-center
+                collapsible
+                py-3
+                toggle
+                mb-0
+                collapsed
+              "
+                data-bs-toggle="collapse"
+                data-bs-target="#kt_run_8"
+                aria-expanded="false"
+            >
+              <!--begin::Icon-->
+              <div
+                  class="
+                  btn btn-sm btn-icon
+                  mw-20px
+                  btn-active-color-primary
+                  me-5
+                "
+              >
+                <span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
+                  <inline-svg :src="require('@/assets/media/icons/gen036.svg')" />
+                </span>
+                <span class="svg-icon toggle-off svg-icon-1">
+                  <inline-svg :src="require('@/assets/media/icons/gen035.svg')" />
+                </span>
+              </div>
+              <!--end::Icon-->
+
+              <!--begin::Title-->
+              <h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">
+                تابع بی نام(anonymous) به عنوان پارامتر ورودی یک تابع دیگر(callback)
+              </h4>
+              <!--end::Title-->
+            </div>
+            <!--end::Heading-->
+
+            <!--begin::Body-->
+            <div id="kt_run_8" class="fs-6 ms-1 collapse">
+              <!--begin::Text-->
+              <div class="mb-4 text-gray-600 fw-bold fs-6 ps-10">
+                <div class="pb-5">
+                  با استفاده از توابع بی نام لامبدا
+                  <CodeHighlighter lang="javascript"
+                  >{{ `
+$names = ['Ali', 'Reza', 'Ahmad'];
+$out = $names.map(($a) => {
+    return $a.length;
+});
+console.log($names);
+console.log($out);
+` }}
+                  </CodeHighlighter>
+                </div>
+              </div>
+              <!--end::Text-->
+
+              <!--begin::Text-->
+              <div class="mb-4 text-gray-600 fw-bold fs-6 ps-10">
+                <div class="pb-5">
+                  با استفاده توابع بی نام معمولی
+                  <CodeHighlighter lang="javascript"
+                  >{{ `
+setInterval(function(){
+    console.log('Salam');
+},5000);
+` }}
+                  </CodeHighlighter>
+                </div>
+              </div>
+              <!--end::Text-->
+            </div>
+            <!--end::Content-->
+
+            <!--begin::Separator-->
+            <div class="separator separator-dashed"></div>
+            <!--end::Separator-->
+          </div>
+          <!--end::Section-->
+
+          <!--begin::Section-->
+          <div class="m-0">
+            <!--begin::Heading-->
+            <div
+                class="
+                d-flex
+                align-items-center
+                collapsible
+                py-3
+                toggle
+                mb-0
+                collapsed
+              "
+                data-bs-toggle="collapse"
+                data-bs-target="#kt_run_9"
+                aria-expanded="false"
+            >
+              <!--begin::Icon-->
+              <div
+                  class="
+                  btn btn-sm btn-icon
+                  mw-20px
+                  btn-active-color-primary
+                  me-5
+                "
+              >
+                <span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
+                  <inline-svg :src="require('@/assets/media/icons/gen036.svg')" />
+                </span>
+                <span class="svg-icon toggle-off svg-icon-1">
+                  <inline-svg :src="require('@/assets/media/icons/gen035.svg')" />
+                </span>
+              </div>
+              <!--end::Icon-->
+
+              <!--begin::Title-->
+              <h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">
+                تابع بی نام(anonymous) با لامبدا یا Arrow function
+              </h4>
+              <!--end::Title-->
+            </div>
+            <!--end::Heading-->
+
+            <!--begin::Body-->
+            <div id="kt_run_9" class="fs-6 ms-1 collapse">
+              <!--begin::Text-->
+              <div class="mb-4 text-gray-600 fw-bold fs-6 ps-10">
+                <div class="pb-5">
+                  ساختار کلی
+                  <CodeHighlighter lang="javascript"
+                  >{{ `
+param => expression
+(param1, paramN) => expression
+` }}
+                  </CodeHighlighter>
+                </div>
+              </div>
+              <!--end::Text-->
+
+              <!--begin::Text-->
+              <div class="mb-4 text-gray-600 fw-bold fs-6 ps-10">
+                <div class="pb-5">
+مثال 1
+                  <CodeHighlighter lang="javascript"
+                  >{{ `// Traditional Anonymous Function
+function (a){
+  return a + 100;
+}
+
+// Arrow Function Break Down
+
+// 1. Remove the word "function" and place arrow between the argument and opening body bracket
+(a) => {
+  return a + 100;
+}
+
+// 2. Remove the body braces and word "return" -- the return is implied.
+(a) => a + 100;
+
+// 3. Remove the argument parentheses
+a => a + 100;
+` }}
+                  </CodeHighlighter>
+                </div>
+              </div>
+              <!--end::Text-->
+
+              <!--begin::Text-->
+              <div class="mb-4 text-gray-600 fw-bold fs-6 ps-10">
+                <div class="pb-5">
+                  مثال 2
+                  <CodeHighlighter lang="javascript"
+                  >{{ `// Traditional Anonymous Function
+function (a, b){
+  return a + b + 100;
+}
+
+// Arrow Function
+(a, b) => a + b + 100;
+
+// Traditional Anonymous Function (no arguments)
+let a = 4;
+let b = 2;
+function (){
+  return a + b + 100;
+}
+
+// Arrow Function (no arguments)
+let a = 4;
+let b = 2;
+() => a + b + 100;
+` }}
+                  </CodeHighlighter>
+                </div>
+              </div>
+              <!--end::Text-->
+
+
+              <!--begin::Text-->
+              <div class="mb-4 text-gray-600 fw-bold fs-6 ps-10">
+                <div class="pb-5">
+                  مثال 3
+                  <CodeHighlighter lang="javascript"
+                  >{{ `// Traditional Anonymous Function
+function (a, b){
+  let chuck = 42;
+  return a + b + chuck;
+}
+
+// Arrow Function
+(a, b) => {
+  let chuck = 42;
+  return a + b + chuck;
+}
+` }}
+                  </CodeHighlighter>
+                </div>
+              </div>
+              <!--end::Text-->
+
+              <!--begin::Text-->
+              <div class="mb-4 text-gray-600 fw-bold fs-6 ps-10">
+                <div class="pb-5">
+                  مثال 4
+                  <CodeHighlighter lang="javascript"
+                  >{{ `// Traditional Function
+function bob (a){
+  return a + 100;
+}
+
+// Arrow Function
+let bob = a => a + 100;
+` }}
+                  </CodeHighlighter>
+                </div>
+              </div>
+              <!--end::Text-->
+
+            </div>
+            <!--end::Content-->
+
+            <!--begin::Separator-->
+            <div class="separator separator-dashed"></div>
+            <!--end::Separator-->
+          </div>
+          <!--end::Section-->
+
           <!--end::Accordion-->
         </div>
         <!--end::Col-->

@@ -40,6 +40,14 @@ const DocMenuConfig = [
             heading: "AJAX",
             route: "/javascript/ajax",
           },
+          {
+            heading: "متد و توابع مهم",
+            route: "/javascript/utilityMethods",
+          },
+          {
+            heading: "تمرین ها",
+            route: "/javascript/practice",
+          },
         ],
       },
       {

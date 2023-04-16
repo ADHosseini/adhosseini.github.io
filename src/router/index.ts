@@ -79,6 +79,16 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import("@/views/javascript/AJAX.vue"),
       },
       {
+        path: "/javascript/utilityMethods/:name?",
+        name: "javascripUtilityMethods",
+        component: () => import("@/views/javascript/UtilityMethods.vue"),
+      },
+      {
+        path: "/javascript/practice/:name?",
+        name: "javascripPractice",
+        component: () => import("@/views/javascript/Practice.vue"),
+      },
+      {
         path: "/account",
         name: "account",
         component: () => import("@/components/page-layouts/Account.vue"),
